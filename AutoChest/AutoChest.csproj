@@ -1,0 +1,30 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <RuntimeIdentifier>win10-x64</RuntimeIdentifier>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <PublishSingleFile>true</PublishSingleFile>
+    <PublishTrimmed>true</PublishTrimmed>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Reference Include="DSharp">
+      <HintPath>imported\DSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="GraphQL.Client">
+      <HintPath>imported\GraphQL.Client.dll</HintPath>
+    </Reference>
+    <Reference Include="GraphQL.Common">
+      <HintPath>imported\GraphQL.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>imported\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <Exec Command="echo F | xcopy $(ProjectDir)config.$(ConfigurationName).json $(TargetDir)config.json /Y" />
+  </Target>
+
+</Project>
