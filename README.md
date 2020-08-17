@@ -18,7 +18,7 @@ The configuration file contains various options that can be modified to serve th
 
 ### Advanced configuration
 In addition to the default configuration, more advanced options are available.
-These are enabled by replacing the <i>percentage</i> property with a <i>percentage<b>s</s></i> property and adjusting the individual percentages for the events you want.
+These are enabled by replacing the <i>percentage</i> property with a <i>percentage<b>s</b></i> property and adjusting the individual percentages for the events you want.
 If you want to disable an event, either leave out the event from the <i>percentages</i> property or set the value to 0.
 
 An example of an advanced configuration is like so,
