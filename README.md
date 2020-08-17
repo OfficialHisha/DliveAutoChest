@@ -1,6 +1,10 @@
 # DliveAutoChest
 This program will listen to donations and will, according to configuration, add a percentage of the donation into the community chest of your channel
 
+You can download the latest version [here](https://github.com/OfficialHisha/DliveAutoChest/releases/latest)
+
+Any comments and/or ideas are appreciated and you are welcome to open a ticket with issues and ideas [here](https://github.com/OfficialHisha/DliveAutoChest/issues)
+
 ## Configuration
 The configuration file contains various options that can be modified to serve the specific needs of a user.
 
