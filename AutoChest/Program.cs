@@ -10,7 +10,7 @@ namespace AutoChest
 {
     class Program
     {
-        private static Config Config { get; set; } = null;
+        private static Config Config { get; set; }
         private static DliveAccount Account { get; set; } = null;
 
         static void Main()
@@ -91,26 +91,29 @@ namespace AutoChest
                 case ChatEventType.GIFT:
                     ChatGiftMessage giftMessage = message as ChatGiftMessage;
 
-                    int amountToAdd = SplitDonation(giftMessage.GiftLemonValue);
+                    int amountToAdd = SplitDonation(giftMessage.GiftLemonValue, Config.GetPercentageForGiftType(giftMessage.GiftType));
+                    if (amountToAdd <= 0) return;
 
                     Account.Mutation.AddChestValue(amountToAdd);
-                    Console.WriteLine($"{giftMessage.User.Displayname} gifted {giftMessage.GiftLemonValue} Lemon! Added {amountToAdd} Lemon to the chest");
+                    PrintStatus($"{giftMessage.User.Displayname} gifted {giftMessage.GiftLemonValue} Lemon! Added {amountToAdd} Lemon to the chest");
                     break;
                 case ChatEventType.SUBSCRIPTION:
                     ChatSubscriptionMessage subMessage = message as ChatSubscriptionMessage;
-                    int toAdd = SplitDonation(298);
+
+                    int toAdd = SplitDonation(298, Config.GetPercentageForSub());
+                    if (toAdd <= 0) return;
 
                     Account.Mutation.AddChestValue(toAdd);
-                    Console.WriteLine($"{subMessage.User.Displayname} just subscribed! Added {toAdd} Lemon to the chest");
+                    PrintStatus($"{subMessage.User.Displayname} just subscribed! Added {toAdd} Lemon to the chest");
                     break;
                 default:
                     break;
             }
         }
 
-        static int SplitDonation(int value)
+        static int SplitDonation(int value, int percentage)
         {
-            return (int)(value * (Config.Percentage / 100f));
+            return (int)(value * (percentage / 100f));
         }
     }
 }
